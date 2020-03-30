@@ -1,4 +1,8 @@
-import * as types from '../types'; // types can be used as 'types.<YOUR-TYPE>'
-import { axiosWithAuth } from '../../utils/axiosWithAuth';
-
 // ACTIONS LIVE HERE
+
+import { login, signup } from './authActions';
+
+export default {
+	login,
+	signup
+};

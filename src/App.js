@@ -4,12 +4,17 @@ import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 // Redux
 import { connect } from 'react-redux';
 import './App.css';
+// components
+import Login from './components/Login';
+
 
 const App = () => {
   return (
     <Router>
       <div className="App">
-        <h1>WELCOME TO SPENCER'S REDUX STARTER</h1>
+        <Switch>
+          <Route exact path='/' component={Login} />
+        </Switch>
       </div>
     </Router>
   );
