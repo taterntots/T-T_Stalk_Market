@@ -51,6 +51,7 @@ const Login = ({ login, isLoading, history }) => {
               name='villager_name'
               placeholder='Stitches'
               autoCapitalize='none'
+              ref={register}
             />
             <FormLabel>Password</FormLabel>
             <Input
@@ -59,6 +60,7 @@ const Login = ({ login, isLoading, history }) => {
               name='password'
               placeholder='********'
               autoCapitalize='none'
+              ref={register}
             />
             <Flex w='100%' justify='center'>
               <Button

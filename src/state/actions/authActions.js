@@ -15,7 +15,8 @@ export const signup = creds => dispatch => {
     .then(res => {
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('userId', res.data.id);
-      localStorage.setItem('username', res.data.username);
+      localStorage.setItem('villager_name', res.data.villager_name);
+      localStorage.setItem('island_name', res.data.island_name);
       dispatch({ type: SIGNUP_SUCCESS, payload: res.data });
     })
     .catch(err => {
@@ -30,7 +31,8 @@ export const login = creds => dispatch => {
     .then(res => {
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('userId', res.data.id);
-      localStorage.setItem('username', res.data.username);
+      localStorage.setItem('villager_name', res.data.villager_name);
+      localStorage.setItem('island_name', res.data.island_name);
       dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data,

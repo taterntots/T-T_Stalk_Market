@@ -21,9 +21,15 @@ import {
 const Signup = ({ signup, isLoading, history }) => {
   const { handleSubmit, errors, register, formState } = useForm();
 
+  const submitForm = creds => {
+    signup(creds).then(() => {
+      history.push('/dashboard');
+    });
+  };
+
   return (
     <Flex h='100vh' align='center' justify='center' bg='#79C3D8'>
-      <form>
+      <form onSubmit={handleSubmit(submitForm)}>
         <Flex
           flexDir='column'
           background='#FDFDFF'
@@ -43,16 +49,18 @@ const Signup = ({ signup, isLoading, history }) => {
               mb='30px'
               type='text'
               name='villager_name'
-              placeholder='Stitches'
+              placeholder='Tater'
               autoCapitalize='none'
+              ref={register}
             />
             <FormLabel>Island Name</FormLabel>
             <Input
               mb='30px'
               type='text'
               name='island_name'
-              placeholder='Stitches'
+              placeholder='Memoria'
               autoCapitalize='none'
+              ref={register}
             />
             <FormLabel>Password</FormLabel>
             <Input
@@ -61,6 +69,7 @@ const Signup = ({ signup, isLoading, history }) => {
               name='password'
               placeholder='********'
               autoCapitalize='none'
+              ref={register}
             />
             <Flex w='100%' justify='center'>
               <Button
