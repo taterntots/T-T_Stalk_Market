@@ -6,17 +6,21 @@ import { connect } from 'react-redux';
 import './App.css';
 // components
 import Login from './components/Login';
-
+// styles
+import { ThemeProvider } from '@chakra-ui/core';
+import customTheme from './theme/customTheme';
 
 const App = () => {
   return (
-    <Router>
-      <div className="App">
-        <Switch>
-          <Route exact path='/' component={Login} />
-        </Switch>
-      </div>
-    </Router>
+    <ThemeProvider theme={customTheme}>
+      <Router>
+        <div className="App">
+          <Switch>
+            <Route exact path='/' component={Login} />
+          </Switch>
+        </div>
+      </Router>
+    </ThemeProvider>
   );
 };
 
