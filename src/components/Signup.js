@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 // actions
-import login from '../state/actions/index';
+import signup from '../state/actions/index';
 // styles
 import {
   Input,
@@ -18,18 +18,12 @@ import {
   Stack
 } from '@chakra-ui/core';
 
-const Login = ({ login, isLoading, history }) => {
+const Signup = ({ signup, isLoading, history }) => {
   const { handleSubmit, errors, register, formState } = useForm();
-
-  const submitForm = creds => {
-    login(creds).then(() => {
-      history.push('/dashboard');
-    })
-  };
 
   return (
     <Flex h='100vh' align='center' justify='center' bg='#79C3D8'>
-      <form onSubmit={handleSubmit(submitForm)}>
+      <form>
         <Flex
           flexDir='column'
           background='#FDFDFF'
@@ -49,6 +43,14 @@ const Login = ({ login, isLoading, history }) => {
               mb='30px'
               type='text'
               name='villager_name'
+              placeholder='Stitches'
+              autoCapitalize='none'
+            />
+            <FormLabel>Island Name</FormLabel>
+            <Input
+              mb='30px'
+              type='text'
+              name='island_name'
               placeholder='Stitches'
               autoCapitalize='none'
             />
@@ -74,18 +76,18 @@ const Login = ({ login, isLoading, history }) => {
                 type='submit'
                 data-cy='registerSubmit'
               >
-                Login
+                Sign up
 								</Button>
             </Flex>
             <Text>
-              Don't have an account?{' '}
+              Already have an account?{' '}
               <Link
-                to='/signup'
+                to='/'
                 color='black'
                 fontWeight='bold'
                 underline='none'
               >
-                Sign up here!
+                Login here!
 									</Link>
             </Text>
           </Flex>
@@ -101,4 +103,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, login)(Login);
+export default connect(mapStateToProps, signup)(Signup);

@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import './App.css';
 // components
 import Login from './components/Login';
+import Signup from './components/Signup';
+import Dashboard from './components/Dashboard';
 // styles
 import { ThemeProvider } from '@chakra-ui/core';
 import customTheme from './theme/customTheme';
@@ -17,6 +19,8 @@ const App = () => {
         <div className="App">
           <Switch>
             <Route exact path='/' component={Login} />
+            <Route path='/signup' component={Signup} />
+            <Route exact path='/dashboard' component={Dashboard} />
           </Switch>
         </div>
       </Router>
