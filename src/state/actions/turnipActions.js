@@ -41,10 +41,10 @@ export const getTurnipById = reviewId => dispatch => {
 
 // ============ POST TURNIP ===========
 
-export const postTurnip = (userId, newReview) => dispatch => {
+export const postTurnip = (villagerId, newTurnip) => dispatch => {
 	dispatch({ type: POST_TURNIP_START });
 	return axiosWithAuth()
-		.post(`/users/${userId}/add-review`, newReview)
+		.post(`/villagers/${villagerId}/add-turnip-price`, newTurnip)
 		.then(res => {
 			dispatch({ type: POST_TURNIP_SUCCESS, payload: res.data });
 		})

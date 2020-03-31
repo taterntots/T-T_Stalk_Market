@@ -18,18 +18,18 @@ const TurnipCard = ({ turnip, morningTime, history }) => {
       background='#AFE8D0'
       color='white'
       my='2%'
-      mx='10%'
-      px='2%'
+      mx='15%'
+      p='10px'
     >
       <Flex width='100%' justify='space-evenly'>
+        <Image src={require('../icons/paw-print.png')} size='3.8em' />
         <Flex alignItems='center'>
-          <Image src={require('../icons/island.png')} size='3.8em' pr='5%' />
           <Text fontSize='4xl'>
             {turnip.villager_name}
           </Text>
         </Flex>
+        <Image src={require('../icons/island.png')} size='3.8em' />
         <Flex alignItems='center'>
-          <Image src={require('../icons/island.png')} size='3.8em' pr='5%' />
           <Text fontSize='4xl'>
             {turnip.island_name}
           </Text>

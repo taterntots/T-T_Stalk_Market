@@ -2,10 +2,11 @@
 
 import { login, signup } from './authActions';
 
-import { getTurnips } from './turnipActions';
+import { getTurnips, postTurnip } from './turnipActions';
 
 export default {
 	login,
 	signup,
-	getTurnips
+	getTurnips,
+	postTurnip
 };
