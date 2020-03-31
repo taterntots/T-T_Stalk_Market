@@ -7,14 +7,13 @@ import {
   Flex
 } from '@chakra-ui/core';
 
-const TurnipCard = ({ turnip, history }) => {
+const TurnipCard = ({ turnip, morningTime, history }) => {
 
   return (
     <Flex
       width='80%'
       flexDir='column'
       alignItems='center'
-      // justifyContent='center'
       borderRadius='12px'
       background='#F2F6FE'
       my='2%'
@@ -26,12 +25,14 @@ const TurnipCard = ({ turnip, history }) => {
       <Flex>
         Island: {turnip.island_name}
       </Flex>
-      <Flex>
-        morning price: {turnip.morning_price}
-      </Flex>
-      <Flex>
-        afternoon price: {turnip.afternoon_price}
-      </Flex>
+      {morningTime ?
+        <Flex>
+          morning price: {turnip.morning_price}
+        </Flex> :
+        <Flex>
+          afternoon price: {turnip.afternoon_price}
+        </Flex>
+      }
     </Flex>
   )
 }
