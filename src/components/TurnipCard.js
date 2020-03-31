@@ -4,35 +4,55 @@ import { connect } from 'react-redux';
 
 // styles
 import {
-  Flex
+  Flex,
+  Image,
+  Text
 } from '@chakra-ui/core';
 
 const TurnipCard = ({ turnip, morningTime, history }) => {
 
   return (
     <Flex
-      width='80%'
-      flexDir='column'
       alignItems='center'
       borderRadius='12px'
-      background='#F2F6FE'
+      background='#AFE8D0'
+      color='white'
       my='2%'
       mx='10%'
+      px='2%'
     >
-      <Flex>
-        Villager: {turnip.villager_name}
-      </Flex>
-      <Flex>
-        Island: {turnip.island_name}
-      </Flex>
-      {morningTime ?
-        <Flex>
-          morning price: {turnip.morning_price}
-        </Flex> :
-        <Flex>
-          afternoon price: {turnip.afternoon_price}
+      <Flex width='100%' justify='space-evenly'>
+        <Flex alignItems='center'>
+          <Image src={require('../icons/island.png')} size='3.8em' pr='5%' />
+          <Text fontSize='4xl'>
+            {turnip.villager_name}
+          </Text>
         </Flex>
-      }
+        <Flex alignItems='center'>
+          <Image src={require('../icons/island.png')} size='3.8em' pr='5%' />
+          <Text fontSize='4xl'>
+            {turnip.island_name}
+          </Text>
+        </Flex>
+      </Flex>
+
+      <Image src={require('../icons/bell-bag.png')} size='3.8em' alignItems='center' />
+      <Flex width='15%' justify='center'>
+        {morningTime
+          ?
+          <Flex>
+            <Text fontSize='5xl'>
+              {turnip.morning_price}
+            </Text>
+          </Flex>
+          :
+          <Flex>
+            <Text fontSize='5xl'>
+              {turnip.afternoon_price}
+            </Text>
+          </Flex>
+        }
+      </Flex>
     </Flex>
   )
 }
