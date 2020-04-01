@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 // components
 import TurnipCard from '../components/TurnipCard';
@@ -21,13 +20,15 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  useDisclosure
+  useDisclosure,
+  useToast
 } from '@chakra-ui/core';
 
-const Dashboard = ({ data, getTurnips, postTurnip, isLoading, history }) => {
+const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, history }) => {
   const [morningTime, setMorningTime] = useState(true);
   const { handleSubmit, errors, register, formState } = useForm();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const toast = useToast();
 
   // pull turnip data
   useEffect(() => {
@@ -50,10 +51,30 @@ const Dashboard = ({ data, getTurnips, postTurnip, isLoading, history }) => {
     return mp.afternoon_price >= 1;
   })
 
+console.log(turnipAdded);
+
   //submit handler
   const submitForm = (data) => {
     postTurnip(localStorage.getItem('userId'), data).then(() => {
       // window.location.reload();
+      history.push('/dashboard')
+      if (turnipAdded) {
+        toast({
+          title: 'Turnip Price Added!',
+          description: `We've added a turnip price for you.`,
+          status: 'success',
+          duration: 5000,
+          isClosable: true
+        })
+      } else {
+        toast({
+          title: 'An error occurred',
+          description: `Unable to add turnip price`,
+          status: 'error',
+          duration: 5000,
+          isClosable: true
+        })
+      }
     })
   }
 
@@ -62,7 +83,7 @@ const Dashboard = ({ data, getTurnips, postTurnip, isLoading, history }) => {
   return (
     <>
       {/* ------------------------------------------------------------------------------------ */}
-      {/* -------------------------------- Add Turnip Modals --------------------------------- */}
+      {/* -------------------------------- Add Turnip Modal --------------------------------- */}
       {/* ------------------------------------------------------------------------------------ */}
 
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -167,7 +188,8 @@ const mapStateToProps = state => {
   console.log(state);
   return {
     isLoading: state.turnip.fetchingData,
-    data: state.turnip.data
+    data: state.turnip.data,
+    turnipAdded: state.turnip.turnipAdded
   };
 };
 export default connect(mapStateToProps, (getTurnips, postTurnip))(Dashboard);

@@ -7,7 +7,10 @@ import {
   FETCH_TURNIP_BY_ID_SUCCESS,
   POST_TURNIP_FAILURE,
   POST_TURNIP_START,
-  POST_TURNIP_SUCCESS
+	POST_TURNIP_SUCCESS,
+	DELETE_TURNIP_FAILURE,
+  DELETE_TURNIP_START,
+	DELETE_TURNIP_SUCCESS
 } from '../types';
 
 const initialState = {
@@ -16,6 +19,8 @@ const initialState = {
 	fetchingData: false,
 	isLoading: false,
 	turnipAdded: false,
+	isDeleting: false,
+	turnipDeleted: false,
 	error: ''
 };
 
@@ -87,6 +92,29 @@ const turnipReducer = (state = initialState, action) => {
 				...state,
 				fetchingData: false,
         isLoading: false,
+				error: action.payload
+			};
+		}
+		case DELETE_TURNIP_START: {
+			return {
+				...state,
+				isDeleting: true,
+				turnipDeleted: false
+			};
+		}
+		case DELETE_TURNIP_SUCCESS: {
+			return {
+				...state,
+				dataById: action.payload,
+				isDeleting: false,
+				turnipDeleted: true
+			};
+		}
+		case DELETE_TURNIP_FAILURE: {
+			return {
+				...state,
+				isDeleting: false,
+				turnipDeleted: false,
 				error: action.payload
 			};
 		}

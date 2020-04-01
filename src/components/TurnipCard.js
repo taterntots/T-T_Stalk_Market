@@ -1,22 +1,34 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { connect } from 'react-redux';
 // actions
-
+import deleteTurnip from '../state/actions/index';
 // styles
 import {
   Flex,
   Image,
-  Text
+  Text,
+  PseudoBox
 } from '@chakra-ui/core';
 
-const TurnipCard = ({ turnip, morningTime, history }) => {
+const TurnipCard = ({ turnip, deleteTurnip, morningTime, history }) => {
+
+  //deletes the turnip price in question
+  const submitDelete = () => {
+    deleteTurnip(turnip.villager_id, turnip.turnip_id).then(() => {
+      // window.location.reload();
+      history.push('/dashboard')
+    });
+  };
 
   return (
-    <Flex
+    <PseudoBox
+      display='flex'
       alignItems='center'
       borderRadius='12px'
       background='#AFE8D0'
       color='white'
+      _hover={{ bg: '#E9F0FF' }}
+      onClick={submitDelete}
       my='2%'
       mx='15%'
       p='10px'
@@ -53,7 +65,7 @@ const TurnipCard = ({ turnip, morningTime, history }) => {
           </Flex>
         }
       </Flex>
-    </Flex>
+    </PseudoBox>
   )
 }
 
@@ -63,4 +75,4 @@ const mapStateToProps = state => {
   };
 }
 
-export default connect(mapStateToProps)(TurnipCard);
+export default connect(mapStateToProps, deleteTurnip)(TurnipCard);

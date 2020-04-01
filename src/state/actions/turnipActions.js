@@ -8,7 +8,10 @@ import {
 	FETCH_TURNIP_BY_ID_SUCCESS,
 	POST_TURNIP_FAILURE,
 	POST_TURNIP_START,
-	POST_TURNIP_SUCCESS
+	POST_TURNIP_SUCCESS,
+	DELETE_TURNIP_FAILURE,
+	DELETE_TURNIP_START,
+	DELETE_TURNIP_SUCCESS
 } from '../types';
 
 // ============ GET ALL TURNIPS ===========
@@ -39,7 +42,7 @@ export const getTurnipById = reviewId => dispatch => {
 		});
 };
 
-// ============ POST TURNIP ===========
+// ============ POST TURNIP PRICE ===========
 
 export const postTurnip = (villagerId, newTurnip) => dispatch => {
 	dispatch({ type: POST_TURNIP_START });
@@ -50,5 +53,19 @@ export const postTurnip = (villagerId, newTurnip) => dispatch => {
 		})
 		.catch(err => {
 			dispatch({ type: POST_TURNIP_FAILURE, payload: err.response });
+		});
+};
+
+// ============ DELETE TURNIP PRICE ===========
+
+export const deleteTurnip = (villagerId, turnipId) => dispatch => {
+	dispatch({ type: DELETE_TURNIP_START });
+	return axiosWithAuth()
+		.delete(`/villagers/${villagerId}/turnips/${turnipId}`)
+		.then(res => {
+			dispatch({ type: DELETE_TURNIP_SUCCESS, payload: res.data });
+		})
+		.catch(err => {
+			dispatch({ type: DELETE_TURNIP_FAILURE, payload: err });
 		});
 };
