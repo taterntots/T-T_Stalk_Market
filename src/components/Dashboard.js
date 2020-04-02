@@ -51,7 +51,15 @@ const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, histo
     return mp.afternoon_price >= 1;
   })
 
-console.log(turnipAdded);
+  const logout = () => {
+    localStorage.clear('token');
+    localStorage.clear('userId');
+    localStorage.clear('villager_name');
+    localStorage.clear('island_name');
+    history.push('/');
+  };
+
+  console.log(turnipAdded);
 
   //submit handler
   const submitForm = (data) => {
@@ -135,6 +143,9 @@ console.log(turnipAdded);
       {/* ------------------------------------------------------------------------------------ */}
 
       {/* Header with turnip title and date */}
+      <Flex justify='flex-end' mx='15%' mt='2%'>
+        <Button onClick={logout}>Logout</Button>
+      </Flex>
       <Flex as='h1' justify='center'>
         Today's Turnip Prices
       </Flex>
