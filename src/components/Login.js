@@ -20,6 +20,8 @@ import {
 
 const Login = ({ login, isLoading, history }) => {
   const { handleSubmit, errors, register, formState } = useForm();
+  const [show, setShow] = React.useState(false);
+  const handleClick = () => setShow(!show);
 
   const submitForm = creds => {
     login(creds).then(() => {
@@ -45,7 +47,6 @@ const Login = ({ login, isLoading, history }) => {
           >
             Welcome back!
 					</Flex>
-
           <FormLabel mt='3%'>Villager Name</FormLabel>
           <Input
             h='58px'
@@ -57,15 +58,29 @@ const Login = ({ login, isLoading, history }) => {
           />
 
           <FormLabel mt='3%'>Password</FormLabel>
-          <Input
-            h='58px'
-            type='text'
-            name='password'
-            placeholder='********'
-            autoCapitalize='none'
-            ref={register}
-          />
-
+          <InputGroup>
+            <Input
+              h='58px'
+              type={show ? 'text' : 'password'}
+              name='password'
+              placeholder='********'
+              autoCapitalize='none'
+              ref={register}
+            />
+            <InputRightElement width='4.5rem' py='32px'>
+              <Button
+                // position='fixed'
+                h='1.75rem'
+                color='rgba(72, 72, 72, 0.1)'
+                border='none'
+                size='sm'
+                backgroundColor='#FDFDFF'
+                onClick={handleClick}
+              >
+                {show ? 'Hide' : 'Show'}
+              </Button>
+            </InputRightElement>
+          </InputGroup>
           <Button
             h='58px'
             mt='8%'
@@ -79,7 +94,6 @@ const Login = ({ login, isLoading, history }) => {
           >
             Login
 					</Button>
-
           <Text textAlign='center' mt='6%'>
             Don't have an account?{' '}
             <Link
