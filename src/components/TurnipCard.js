@@ -7,18 +7,34 @@ import {
   Flex,
   Image,
   Text,
-  PseudoBox
+  Button,
+  CloseButton,
+  PseudoBox,
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay
 } from '@chakra-ui/core';
 
 const TurnipCard = ({ turnip, deleteTurnip, morningTime, history }) => {
+  const loginId = localStorage.getItem('userId');
 
-  //deletes the turnip price in question
+  // needed for alert boxes
+  const [isOpen, setIsOpen] = React.useState();
+  const onClose = () => setIsOpen(false);
+  const cancelRef = React.useRef();
+
+  // deletes the turnip price in question
   const submitDelete = () => {
     deleteTurnip(turnip.villager_id, turnip.turnip_id).then(() => {
-      // window.location.reload();
-      history.push('/dashboard')
+      window.location.reload();
+      // history.push('/dashboard')
     });
   };
+
+  console.log(turnip)
 
   return (
     <PseudoBox
@@ -27,8 +43,7 @@ const TurnipCard = ({ turnip, deleteTurnip, morningTime, history }) => {
       borderRadius='12px'
       background='#26A69A'
       color='white'
-      _hover={{ bg: '#E9F0FF' }}
-      onClick={submitDelete}
+      // _hover={{ bg: '#E9F0FF' }}
       mt='2%'
       mx='15%'
       p='10px'
@@ -66,10 +81,44 @@ const TurnipCard = ({ turnip, deleteTurnip, morningTime, history }) => {
               <Text fontSize='5xl'>
                 {turnip.afternoon_price}
               </Text>
-            </Flex>
-          }
+            </Flex>}
         </Flex>
       </Flex>
+      {Number(loginId) === Number(turnip.villager_id) ? (
+        <Flex>
+          <CloseButton size='sm' cursor='pointer' border='none' onClick={() => setIsOpen(true)} />
+        </Flex>
+      ) : null}
+
+      {/* Alert for Deleting */}
+      <AlertDialog
+        isOpen={isOpen}
+        leastDestructiveRef={cancelRef}
+        onClose={onClose}
+      >
+        <AlertDialogOverlay />
+        <AlertDialogContent>
+          <AlertDialogHeader fontSize="lg" fontWeight="bold">
+            Reset Turnip Price?
+          </AlertDialogHeader>
+
+          <AlertDialogBody>
+            <Image src={require('../images/resetti.png')} objectFit='cover' />
+            Resetting... It’s like...pressing an emergency call button. You press it and I gotta come read you the riot act. See?
+          </AlertDialogBody>
+
+          <AlertDialogFooter>
+            <Button ref={cancelRef} onClick={onClose}>
+              Cancel
+            </Button>
+            <Button variantColor="red" onClick={submitDelete} ml={3}>
+              Reset
+            </Button>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+
     </PseudoBox>
   )
 }

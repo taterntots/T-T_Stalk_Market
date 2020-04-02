@@ -172,7 +172,7 @@ const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, histo
           {/* Buttons for turnip time of day */}
           <Flex justify='space-evenly' mx='10%'>
             <Flex mb='2%'>
-              <Button backgroundColor='#91D5E2' border='none' color='white' onClick={navToMorningPrice}>Morning</Button>
+              <Button backgroundColor={morningTime ? '#F8996D' : '#91D5E2'} border='none' color='white' onClick={navToMorningPrice}>Morning</Button>
               {morningTime ?
                 <Button backgroundColor='#91D5E2' border='none' color='white' onClick={onOpen} ml='5px'>+</Button>
                 :
@@ -183,7 +183,7 @@ const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, histo
               {(new Date().getMonth() + 1) + '-' + new Date().getDate() + '-' + new Date().getFullYear()}
             </Text>
             <Flex>
-              <Button backgroundColor='#91D5E2' border='none' color='white' onClick={navToAfternoonPrice}>Afternoon</Button>
+              <Button backgroundColor={!morningTime ? '#F8996D' : '#91D5E2'} border='none' color='white' onClick={navToAfternoonPrice}>Afternoon</Button>
               {morningTime ?
                 <Button backgroundColor='#91D5E2' border='none' color='white' onClick={onOpen} isDisabled='true' ml='5px'>+</Button>
                 :
