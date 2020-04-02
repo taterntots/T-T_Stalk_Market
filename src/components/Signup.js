@@ -30,7 +30,18 @@ const Signup = ({ signup, isLoading, history }) => {
   };
 
   return (
-    <Flex h='100vh' align='center' justify='center' bg='#79C3D8' >
+    <Flex h='100vh'
+      align='center'
+      // justify='center'
+      pl='25%'
+      style={{
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'fixed',
+        backgroundImage: `url(${require('../images/AC-island-nintendo.jpg')})`
+      }}
+    >
       <form onSubmit={handleSubmit(submitForm)}>
         <Flex
           flexDir='column'
