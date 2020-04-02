@@ -25,11 +25,11 @@ const TurnipCard = ({ turnip, deleteTurnip, morningTime, history }) => {
       display='flex'
       alignItems='center'
       borderRadius='12px'
-      background='#AFE8D0'
+      background='#26A69A'
       color='white'
       _hover={{ bg: '#E9F0FF' }}
       onClick={submitDelete}
-      my='2%'
+      mt='2%'
       mx='15%'
       p='10px'
     >

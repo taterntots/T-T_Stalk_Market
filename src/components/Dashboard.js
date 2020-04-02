@@ -10,6 +10,8 @@ import postTurnip from '../state/actions/index';
 import {
   Flex,
   Button,
+  Box,
+  Text,
   Input,
   InputGroup,
   InputLeftAddon,
@@ -86,8 +88,6 @@ const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, histo
     })
   }
 
-  console.log(data);
-
   return (
     <>
       {/* ------------------------------------------------------------------------------------ */}
@@ -143,54 +143,83 @@ const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, histo
       {/* ------------------------------------------------------------------------------------ */}
 
       {/* Header with turnip title and date */}
-      <Flex justify='flex-end' mx='15%' mt='2%'>
-        <Button onClick={logout}>Logout</Button>
-      </Flex>
-      <Flex as='h1' justify='center'>
-        Today's Turnip Prices
-      </Flex>
-      <Flex as='h2' justify='center'>
-        {(new Date().getMonth() + 1) + '-' + new Date().getDate() + '-' + new Date().getFullYear()}
-      </Flex>
+      <Box
+        // h='100vh'
+        // bg='#E4D6A2'
+        // pt='2%'
+        style={{
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed',
+          backgroundImage: `url(${require('../images/AC-poptart.jpg')})`
+        }}
+      >
+        <Box
+          bg='#B199C9'
+          mx='10%'
+          roundedBottom='12px'
+          position='fixed'
+          w='80%'
+        >
+          <Flex as='h2' justify='space-between' color='white' mt='1%' mx='2%'>
+            <Text>
+              Turnip Prices
+            </Text>
+            <Button backgroundColor='#F3747B' border='none' color='white' onClick={logout}>Logout</Button>
+          </Flex>
 
-      {/* Buttons for turnip time of day */}
-      <Flex justify='space-evenly' mt='1%' mx='10%'>
-        <Flex>
-          <Button backgroundColor='#9ADAE1' border='none' color='white' onClick={navToMorningPrice}>Morning</Button>
-          {morningTime ?
-            <Button backgroundColor='#9ADAE1' border='none' color='white' onClick={onOpen} ml='5px'>+</Button>
-            :
-            <Button backgroundColor='#9ADAE1' border='none' color='white' onClick={onOpen} isDisabled='true' ml='5px'>+</Button>
-          }
-        </Flex>
-        <Flex>
-          <Button backgroundColor='#9ADAE1' border='none' color='white' onClick={navToAfternoonPrice}>Afternoon</Button>
-          {morningTime ?
-            <Button backgroundColor='#9ADAE1' border='none' color='white' onClick={onOpen} isDisabled='true' ml='5px'>+</Button>
-            :
-            <Button backgroundColor='#9ADAE1' border='none' color='white' onClick={onOpen} ml='5px'>+</Button>
-          }
-        </Flex>
-      </Flex>
+          {/* Buttons for turnip time of day */}
+          <Flex justify='space-evenly' mx='10%'>
+            <Flex mb='2%'>
+              <Button backgroundColor='#91D5E2' border='none' color='white' onClick={navToMorningPrice}>Morning</Button>
+              {morningTime ?
+                <Button backgroundColor='#91D5E2' border='none' color='white' onClick={onOpen} ml='5px'>+</Button>
+                :
+                <Button backgroundColor='#91D5E2' border='none' color='white' onClick={onOpen} isDisabled='true' ml='5px'>+</Button>
+              }
+            </Flex>
+            <Text as='h2' color='white' textAlign='center'>
+              {(new Date().getMonth() + 1) + '-' + new Date().getDate() + '-' + new Date().getFullYear()}
+            </Text>
+            <Flex>
+              <Button backgroundColor='#91D5E2' border='none' color='white' onClick={navToAfternoonPrice}>Afternoon</Button>
+              {morningTime ?
+                <Button backgroundColor='#91D5E2' border='none' color='white' onClick={onOpen} isDisabled='true' ml='5px'>+</Button>
+                :
+                <Button backgroundColor='#91D5E2' border='none' color='white' onClick={onOpen} ml='5px'>+</Button>
+              }
+            </Flex>
+          </Flex>
+        </Box>
 
-      {/* Turnips Cards */}
-      {morningTime ?
-        morningPricesOnly.map(turnip => (
-          <TurnipCard
-            key={turnip.turnip_id}
-            turnip={turnip}
-            morningTime={morningTime}
-            history={history}
-          />
-        )) :
-        afternoonPricesOnly.map(turnip => (
-          <TurnipCard
-            key={turnip.turnip_id}
-            turnip={turnip}
-            morningTime={morningTime}
-            history={history}
-          />))
-      }
+        <Flex pt='10%'>
+          {/* Space for Fixed Navbar */}
+        </Flex>
+
+        {/* Turnips Cards */}
+        {morningTime ?
+          morningPricesOnly.map(turnip => (
+            <TurnipCard
+              key={turnip.turnip_id}
+              turnip={turnip}
+              morningTime={morningTime}
+              history={history}
+            />
+          )) :
+          afternoonPricesOnly.map(turnip => (
+            <TurnipCard
+              key={turnip.turnip_id}
+              turnip={turnip}
+              morningTime={morningTime}
+              history={history}
+            />
+          ))
+        }
+        <Flex pb='2%'>
+          {/* Empty Box For Bottom Margin */}
+        </Flex>
+      </Box>
     </>
   )
 }
