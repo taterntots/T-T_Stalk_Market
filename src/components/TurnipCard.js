@@ -101,12 +101,10 @@ const TurnipCard = ({ turnip, deleteTurnip, morningTime, history }) => {
           <AlertDialogHeader fontSize="lg" fontWeight="bold">
             Reset Turnip Price?
           </AlertDialogHeader>
-
           <AlertDialogBody>
             <Image src={require('../images/resetti.png')} objectFit='cover' />
             Resetting... It’s like...pressing an emergency call button. You press it and I gotta come read you the riot act. See?
           </AlertDialogBody>
-
           <AlertDialogFooter>
             <Button ref={cancelRef} onClick={onClose}>
               Cancel
@@ -117,8 +115,6 @@ const TurnipCard = ({ turnip, deleteTurnip, morningTime, history }) => {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-
-
     </PseudoBox>
   )
 }
