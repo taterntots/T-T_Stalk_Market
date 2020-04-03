@@ -22,10 +22,17 @@ const Signup = ({ signup, isLoading, history }) => {
   const { handleSubmit, errors, register, formState } = useForm();
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
+  // variables for finding the current hour in the day
+  const today = new Date();
+  const currentHour = today.getHours()
 
   const submitForm = creds => {
     signup(creds).then(() => {
-      history.push('/dashboard');
+      if (currentHour >= 5 && currentHour < 12) {
+        history.push('/dashboard/morning');
+      } else {
+        history.push('/dashboard/afternoon');
+      }
     });
   };
 

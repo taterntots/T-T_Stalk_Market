@@ -15,6 +15,8 @@ import {
   Input,
   InputGroup,
   InputLeftAddon,
+  FormControl,
+  FormErrorMessage,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -31,18 +33,32 @@ const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, histo
   const { handleSubmit, errors, register, formState } = useForm();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
+  // variables for finding the current hour in the day
+  const today = new Date();
+  const currentHour = today.getHours()
 
   // pull turnip data
   useEffect(() => {
     getTurnips();
   }, [getTurnips]);
 
+  // verifies time of day
+  useEffect(() => {
+    if (currentHour >= 5 && currentHour < 12) {
+      setMorningTime(true);
+    } else {
+      setMorningTime(false);
+    }
+  }, []);
+
   const navToMorningPrice = () => {
     setMorningTime(true);
+    history.push('/dashboard/morning');
   }
 
   const navToAfternoonPrice = () => {
     setMorningTime(false);
+    history.push('/dashboard/afternoon');
   }
 
   let morningPricesOnly = data.filter(mp => {
@@ -53,6 +69,16 @@ const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, histo
     return mp.afternoon_price >= 1;
   })
 
+  function validatePrice(value) {
+    let error;
+    if (!value) {
+      error = 'Turnip price is required';
+    } else if (value.length === 1 || value.length > 3) {
+      error = 'Turnip prices must be in double or triple digits';
+    }
+    return error || true;
+  }
+
   const logout = () => {
     localStorage.clear('token');
     localStorage.clear('userId');
@@ -61,30 +87,34 @@ const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, histo
     history.push('/');
   };
 
-  console.log(turnipAdded);
-
   //submit handler
   const submitForm = (data) => {
     postTurnip(localStorage.getItem('userId'), data).then(() => {
-      // window.location.reload();
-      history.push('/dashboard')
-      if (turnipAdded) {
-        toast({
-          title: 'Turnip Price Added!',
-          description: `We've added a turnip price for you.`,
-          status: 'success',
-          duration: 5000,
-          isClosable: true
-        })
+      if (currentHour >= 5 && currentHour < 12) {
+        // setMorningTime(true);
+        history.push('/dashboard/morning');
       } else {
-        toast({
-          title: 'An error occurred',
-          description: `Unable to add turnip price`,
-          status: 'error',
-          duration: 5000,
-          isClosable: true
-        })
+        // setMorningTime(false);
+        history.push('/dashboard/afternoon');
       }
+      window.location.reload();
+      // if (turnipAdded) {
+      //   toast({
+      //     title: 'Turnip Price Added!',
+      //     description: `We've added a turnip price for you.`,
+      //     status: 'success',
+      //     duration: 5000,
+      //     isClosable: true
+      //   })
+      // } else {
+      //   toast({
+      //     title: 'An error occurred',
+      //     description: `Unable to add turnip price`,
+      //     status: 'error',
+      //     duration: 5000,
+      //     isClosable: true
+      //   })
+      // }
     })
   }
 
@@ -97,44 +127,59 @@ const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, histo
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          {morningTime ?
-            <ModalHeader>Add Morning Price</ModalHeader>
-            :
-            <ModalHeader>Add Afternoon Price</ModalHeader>
-          }
-          <ModalCloseButton />
-          <ModalBody>
-            <InputGroup>
-              <InputLeftAddon children='Bells' />
+          <form onSubmit={handleSubmit(submitForm)}>
+            {morningTime ?
+              <ModalHeader>Add Morning Price</ModalHeader>
+              :
+              <ModalHeader>Add Afternoon Price</ModalHeader>
+            }
+            <ModalCloseButton />
+
+            <ModalBody>
               {morningTime ?
-                <Input
-                  name='morning_price'
-                  type='number'
-                  placeholder='XXX'
-                  min='10'
-                  max='999'
-                  roundedLeft='0'
-                  ref={register}
-                />
+                <FormControl isInvalid={errors.morning_price}>
+                  <InputGroup>
+                    <InputLeftAddon children='Bells' />
+                    <Input
+                      name='morning_price'
+                      type='number'
+                      placeholder='XXX'
+                      maxLength='3'
+                      roundedLeft='0'
+                      ref={register({ validate: validatePrice })}
+                    />
+                  </InputGroup>
+                  <FormErrorMessage>
+                    {errors.morning_price && errors.morning_price.message}
+                  </FormErrorMessage>
+                </FormControl>
                 :
-                <Input
-                  name='afternoon_price'
-                  type='number'
-                  placeholder='XXX'
-                  min='10'
-                  max='999'
-                  roundedLeft='0'
-                  ref={register}
-                />
+                <FormControl isInvalid={errors.afternoon_price}>
+                  <InputGroup>
+                    <InputLeftAddon children='Bells' />
+                    <Input
+                      name='afternoon_price'
+                      type='number'
+                      placeholder='XXX'
+                      maxLength='3'
+                      roundedLeft='0'
+                      ref={register({ validate: validatePrice })}
+                    />
+                  </InputGroup>
+                  <FormErrorMessage>
+                    {errors.afternoon_price && errors.afternoon_price.message}
+                  </FormErrorMessage>
+                </FormControl>
               }
-            </InputGroup>
-          </ModalBody>
-          <ModalFooter>
-            <Button variantColor='blue' mr={3} onClick={onClose}>
-              Cancel
+            </ModalBody>
+
+            <ModalFooter>
+              <Button variantColor='blue' mr={3} onClick={onClose}>
+                Cancel
             </Button>
-            <Button type='submit' onClick={handleSubmit(submitForm)} variant='ghost'>Submit</Button>
-          </ModalFooter>
+              <Button type='submit' variant='ghost'>Submit</Button>
+            </ModalFooter>
+          </form>
         </ModalContent>
       </Modal>
 
@@ -198,8 +243,8 @@ const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, histo
         </Flex>
 
         {/* Turnips Cards */}
-        {morningTime ?
-          morningPricesOnly.map(turnip => (
+        {!morningTime ?
+          afternoonPricesOnly.map(turnip => (
             <TurnipCard
               key={turnip.turnip_id}
               turnip={turnip}
@@ -207,7 +252,7 @@ const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, histo
               history={history}
             />
           )) :
-          afternoonPricesOnly.map(turnip => (
+          morningPricesOnly.map(turnip => (
             <TurnipCard
               key={turnip.turnip_id}
               turnip={turnip}

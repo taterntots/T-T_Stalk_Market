@@ -23,17 +23,19 @@ const Login = ({ login, isLoading, history }) => {
   const { handleSubmit, errors, register, formState } = useForm();
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
-  // variables for finding the current hour
+  // variables for finding the current hour in the day
   const today = new Date();
   const currentHour = today.getHours()
 
   const submitForm = creds => {
     login(creds).then(() => {
-      history.push('/dashboard');
+      if (currentHour >= 5 && currentHour < 12) {
+        history.push('/dashboard/morning');
+      } else {
+        history.push('/dashboard/afternoon');
+      }
     })
   };
-  
-  console.log(currentHour);
 
   return (
     <Flex
