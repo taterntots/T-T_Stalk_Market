@@ -8,7 +8,6 @@ import login from '../state/actions/index';
 import {
   Input,
   Button,
-  Image,
   FormControl,
   FormLabel,
   FormErrorMessage,
@@ -16,7 +15,6 @@ import {
   Text,
   InputGroup,
   InputRightElement,
-  Stack
 } from '@chakra-ui/core';
 
 const Login = ({ login, isLoading, history }) => {
@@ -26,6 +24,26 @@ const Login = ({ login, isLoading, history }) => {
   // variables for finding the current hour in the day
   const today = new Date();
   const currentHour = today.getHours()
+
+  function validateVillagerName(value) {
+    let error;
+    if (!value) {
+      error = 'Villager Name is required';
+    } else if (value.length > 10) {
+      error = 'Villager Name cannot exceed 10 characters';
+    }
+    return error || true;
+  }
+
+  function validatePassword(value) {
+    let error;
+    if (!value) {
+      error = 'Password is required';
+    } else if (value.length < 8) {
+      error = 'Password must be at least 8 characters';
+    }
+    return error || true;
+  }
 
   const submitForm = creds => {
     login(creds).then(() => {
@@ -67,40 +85,49 @@ const Login = ({ login, isLoading, history }) => {
           >
             Welcome back!
 					</Flex>
-          <FormLabel mt='3%'>Villager Name</FormLabel>
-          <Input
-            h='58px'
-            type='text'
-            name='villager_name'
-            placeholder='Stitches'
-            autoCapitalize='none'
-            ref={register}
-          />
-
-          <FormLabel mt='3%'>Password</FormLabel>
-          <InputGroup>
+          <FormControl isInvalid={errors.villager_name}>
+            <FormLabel mt='3%'>Villager Name</FormLabel>
             <Input
               h='58px'
-              type={show ? 'text' : 'password'}
-              name='password'
-              placeholder='********'
+              type='text'
+              name='villager_name'
+              placeholder='Stitches'
               autoCapitalize='none'
-              ref={register}
+              ref={register({ validate: validateVillagerName })}
             />
-            <InputRightElement width='4.5rem' py='32px'>
-              <Button
-                // position='fixed'
-                h='1.75rem'
-                color='rgba(72, 72, 72, 0.1)'
-                border='none'
-                size='sm'
-                backgroundColor='#FDFDFF'
-                onClick={handleClick}
-              >
-                {show ? 'Hide' : 'Show'}
-              </Button>
-            </InputRightElement>
-          </InputGroup>
+            <FormErrorMessage>
+              {errors.villager_name && errors.villager_name.message}
+            </FormErrorMessage>
+          </FormControl>
+          <FormControl isInvalid={errors.password}>
+            <FormLabel mt='3%'>Password</FormLabel>
+            <InputGroup>
+              <Input
+                h='58px'
+                type={show ? 'text' : 'password'}
+                name='password'
+                placeholder='********'
+                autoCapitalize='none'
+                ref={register({ validate: validatePassword })}
+              />
+              <InputRightElement width='4.5rem' py='32px'>
+                <Button
+                  // position='fixed'
+                  h='1.75rem'
+                  color='rgba(72, 72, 72, 0.1)'
+                  border='none'
+                  size='sm'
+                  backgroundColor='#FDFDFF'
+                  onClick={handleClick}
+                >
+                  {show ? 'Hide' : 'Show'}
+                </Button>
+              </InputRightElement>
+            </InputGroup>
+            <FormErrorMessage>
+              {errors.password && errors.password.message}
+            </FormErrorMessage>
+          </FormControl>
           <Button
             h='58px'
             mt='8%'
