@@ -27,6 +27,7 @@ import {
   useDisclosure,
   useToast
 } from '@chakra-ui/core';
+import moment from 'moment';
 
 const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, history }) => {
   const [morningTime, setMorningTime] = useState(true);
@@ -34,11 +35,8 @@ const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, histo
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
   // variables for finding the current hour in the day
-  const today = new Date();
-  const currentHour = today.getHours()
-  const currentDate = today.getFullYear() + "-" + ("0" + (today.getMonth() + 1)).slice(-2) + "-" + ("0" + today.getDate()).slice(-2);
-
-  console.log(data);
+  const currentHour = moment().format('HH');
+  const currentDate = moment().format('YYYY-MM-DD');
 
   // pull turnip data
   useEffect(() => {
@@ -65,11 +63,13 @@ const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, histo
   }
 
   let morningPricesOnly = data.filter(mp => {
-    return mp.morning_price >= 1 && !mp.created_at.indexOf(currentDate);
+    const localConvertedMorningDate = moment.utc(mp.created_at).local().format('YYYY-MM-DD HH:mm:ss');
+    return mp.morning_price >= 1 && !localConvertedMorningDate.indexOf(currentDate);
   })
 
   let afternoonPricesOnly = data.filter(ap => {
-    return ap.afternoon_price >= 1 && !ap.created_at.indexOf(currentDate);
+    const localConvertedAfternoonDate = moment.utc(ap.created_at).local().format('YYYY-MM-DD HH:mm:ss');
+    return ap.afternoon_price >= 1 && !localConvertedAfternoonDate.indexOf(currentDate);
   })
 
   function validatePrice(value) {
@@ -93,6 +93,7 @@ const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, histo
   //submit handler
   const submitForm = (data) => {
     postTurnip(localStorage.getItem('userId'), data).then(() => {
+      console.log(data)
       if (currentHour >= 5 && currentHour < 12) {
         // setMorningTime(true);
         history.push('/dashboard/morning');
