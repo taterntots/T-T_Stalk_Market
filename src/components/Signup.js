@@ -100,7 +100,7 @@ const Signup = ({ signup, isLoading, history }) => {
               h='58px'
               type='text'
               name='villager_name'
-              placeholder='Stitches'
+              placeholder='Tater'
               autoCapitalize='none'
               ref={register({ validate: validateVillagerName })}
             />

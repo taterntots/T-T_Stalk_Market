@@ -36,6 +36,9 @@ const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, histo
   // variables for finding the current hour in the day
   const today = new Date();
   const currentHour = today.getHours()
+  const currentDate = today.getFullYear() + "-" + ("0" + (today.getMonth() + 1)).slice(-2) + "-" + ("0" + today.getDate()).slice(-2);
+
+  console.log(data);
 
   // pull turnip data
   useEffect(() => {
@@ -62,11 +65,11 @@ const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, histo
   }
 
   let morningPricesOnly = data.filter(mp => {
-    return mp.morning_price >= 1;
+    return mp.morning_price >= 1 && !mp.created_at.indexOf(currentDate);
   })
 
-  let afternoonPricesOnly = data.filter(mp => {
-    return mp.afternoon_price >= 1;
+  let afternoonPricesOnly = data.filter(ap => {
+    return ap.afternoon_price >= 1 && !ap.created_at.indexOf(currentDate);
   })
 
   function validatePrice(value) {
@@ -225,7 +228,7 @@ const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, histo
               }
             </Flex>
             <Text as='h2' color='white' textAlign='center'>
-              {(new Date().getMonth() + 1) + '-' + new Date().getDate() + '-' + new Date().getFullYear()}
+              {currentDate}
             </Text>
             <Flex>
               <Button backgroundColor={!morningTime ? '#F8996D' : '#91D5E2'} border='none' color='white' onClick={navToAfternoonPrice}>Afternoon</Button>
