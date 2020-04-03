@@ -238,7 +238,7 @@ const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, histo
           </Flex>
         </Box>
 
-        <Flex pt='10%'>
+        <Flex pt='8%'>
           {/* Space for Fixed Navbar */}
         </Flex>
 
