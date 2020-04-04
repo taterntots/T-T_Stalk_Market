@@ -31,7 +31,7 @@ import moment from 'moment';
 
 const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, history }) => {
   const [morningTime, setMorningTime] = useState(true);
-  const { handleSubmit, errors, register, formState } = useForm();
+  const { handleSubmit, errors, register } = useForm();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
   // variables for finding the current hour in the day
@@ -50,7 +50,7 @@ const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, histo
     } else {
       setMorningTime(false);
     }
-  }, []);
+  }, [currentHour]);
 
   const navToMorningPrice = () => {
     setMorningTime(true);
@@ -93,7 +93,6 @@ const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, histo
   //submit handler
   const submitForm = (data) => {
     postTurnip(localStorage.getItem('userId'), data).then(() => {
-      console.log(data)
       if (currentHour >= 5 && currentHour < 12) {
         // setMorningTime(true);
         history.push('/dashboard/morning');
@@ -225,7 +224,7 @@ const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, histo
               {morningTime ?
                 <Button backgroundColor='#91D5E2' border='none' color='white' onClick={onOpen} ml='5px'>+</Button>
                 :
-                <Button backgroundColor='#91D5E2' border='none' color='white' onClick={onOpen} isDisabled='true' ml='5px'>+</Button>
+                <Button backgroundColor='#91D5E2' border='none' color='white' onClick={onOpen} isDisabled={true} ml='5px'>+</Button>
               }
             </Flex>
             <Text as='h2' color='white' textAlign='center'>
@@ -234,7 +233,7 @@ const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, histo
             <Flex>
               <Button backgroundColor={!morningTime ? '#F8996D' : '#91D5E2'} border='none' color='white' onClick={navToAfternoonPrice}>Afternoon</Button>
               {morningTime ?
-                <Button backgroundColor='#91D5E2' border='none' color='white' onClick={onOpen} isDisabled='true' ml='5px'>+</Button>
+                <Button backgroundColor='#91D5E2' border='none' color='white' onClick={onOpen} isDisabled={true} ml='5px'>+</Button>
                 :
                 <Button backgroundColor='#91D5E2' border='none' color='white' onClick={onOpen} ml='5px'>+</Button>
               }
@@ -274,7 +273,6 @@ const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, histo
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     isLoading: state.turnip.fetchingData,
     data: state.turnip.data,

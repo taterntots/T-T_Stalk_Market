@@ -1,6 +1,6 @@
 import React from 'react';
 // React Router
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // Redux
 import { connect } from 'react-redux';
 import './App.css';

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 // actions
 import deleteTurnip from '../state/actions/index';
@@ -33,8 +33,6 @@ const TurnipCard = ({ turnip, deleteTurnip, morningTime, history }) => {
       // history.push('/dashboard')
     });
   };
-
-  console.log(turnip)
 
   return (
     <PseudoBox
