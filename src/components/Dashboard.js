@@ -217,7 +217,7 @@ const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, histo
             <Button backgroundColor='#F3747B' border='none' color='white' onClick={logout}>Logout</Button>
           </Flex>
 
-          <Flex as='h2' color='white' justify='center' mb='10px' display={{ lg: 'none', sm: 'flex' }}>
+          <Flex as='h2' color='white' justify='center' mb='10px' display={{ lg: 'none', xs: 'flex' }}>
             {currentDate}
           </Flex>
 
@@ -232,7 +232,7 @@ const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, histo
               }
             </Flex>
 
-            <Text as='h2' color='white' textAlign='center' display={{ lg: 'flex', sm: 'none' }}>
+            <Text as='h2' color='white' textAlign='center' display={{ lg: 'flex', xs: 'none' }}>
               {currentDate}
             </Text>
 
@@ -247,7 +247,7 @@ const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, histo
           </Flex>
         </Box>
 
-        <Flex pt={{ lg: '105px', sm: '150px' }}>
+        <Flex pt={{ lg: '105px', xs: '150px' }}>
           {/* Space for Fixed Navbar */}
         </Flex>
 
