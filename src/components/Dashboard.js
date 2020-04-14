@@ -25,7 +25,7 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
-  useToast
+  // useToast
 } from '@chakra-ui/core';
 import moment from 'moment';
 
@@ -33,7 +33,7 @@ const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, histo
   const [morningTime, setMorningTime] = useState(true);
   const { handleSubmit, errors, register } = useForm();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const toast = useToast();
+  // const toast = useToast();
   // variables for finding the current hour in the day
   const currentHour = moment().format('HH');
   const currentDate = moment().format('YYYY-MM-DD');
