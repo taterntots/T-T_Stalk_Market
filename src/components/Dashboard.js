@@ -210,16 +210,20 @@ const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, histo
           position='fixed'
           w='80%'
         >
-          <Flex as='h2' justify='space-between' color='white' mt='1%' mx='2%'>
+          <Flex as='h2' justify='space-between' color='white' mt='10px' mx='2%' mb='5px'>
             <Text>
               Turnip Prices
             </Text>
             <Button backgroundColor='#F3747B' border='none' color='white' onClick={logout}>Logout</Button>
           </Flex>
 
+          <Flex as='h2' color='white' justify='center' mb='10px' display={{ lg: 'none', sm: 'flex' }}>
+            {currentDate}
+          </Flex>
+
           {/* Buttons for turnip time of day */}
           <Flex justify='space-evenly' mx='10%'>
-            <Flex mb='2%'>
+            <Flex mb='10px'>
               <Button backgroundColor={morningTime ? '#F8996D' : '#91D5E2'} border='none' color='white' onClick={navToMorningPrice}>Morning</Button>
               {morningTime ?
                 <Button backgroundColor='#91D5E2' border='none' color='white' onClick={onOpen} ml='5px'>+</Button>
@@ -227,9 +231,11 @@ const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, histo
                 <Button backgroundColor='#91D5E2' border='none' color='white' onClick={onOpen} isDisabled={true} ml='5px'>+</Button>
               }
             </Flex>
-            <Text as='h2' color='white' textAlign='center'>
+
+            <Text as='h2' color='white' textAlign='center' display={{ lg: 'flex', sm: 'none' }}>
               {currentDate}
             </Text>
+
             <Flex>
               <Button backgroundColor={!morningTime ? '#F8996D' : '#91D5E2'} border='none' color='white' onClick={navToAfternoonPrice}>Afternoon</Button>
               {morningTime ?
@@ -241,7 +247,7 @@ const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, histo
           </Flex>
         </Box>
 
-        <Flex pt='8%'>
+        <Flex pt={{ lg: '105px', sm: '150px' }}>
           {/* Space for Fixed Navbar */}
         </Flex>
 

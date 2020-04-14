@@ -47,46 +47,48 @@ const TurnipCard = ({ turnip, deleteTurnip, morningTime, history }) => {
       p='10px'
     >
       <Flex width='100%' justify='space-evenly'>
-        <Flex alignItems='center' >
-          <Image src={require('../icons/paw-print.png')} size='4em' />
+        <Flex alignItems='center' display={{ lg: 'flex', sm: 'none' }}>
+          <Image src={require('../icons/paw-print.png')} size={{ lg: '4em', sm: '3em' }} />
         </Flex>
-        <Flex alignItems='center'>
-          <Text fontSize='4xl'>
+        <Flex alignItems='center' display={{ lg: 'flex', sm: 'none' }}>
+          <Text fontSize={{ lg: '4xl', sm: '3xl' }}>
             {turnip.villager_name}
           </Text>
         </Flex>
         <Flex alignItems='center' >
-          <Image src={require('../icons/island.png')} size='4em' />
+          <Image src={require('../icons/island.png')} size={{ lg: '4em', sm: '3em' }} />
         </Flex>
         <Flex alignItems='center'>
-          <Text fontSize='4xl'>
+          <Text fontSize={{ lg: '4xl', sm: '3xl' }}>
             {turnip.island_name}
           </Text>
         </Flex>
         <Flex alignItems='center' >
-          <Image src={require('../icons/bell-bag.png')} size='4em' />
+          <Image src={require('../icons/bell-bag.png')} size={{ lg: '4em', sm: '3em' }} />
         </Flex>
         <Flex justify='center'>
           {morningTime
             ?
             <Flex alignItems='center'>
-              <Text fontSize='5xl'>
+              <Text fontSize={{ lg: '4xl', sm: '3xl' }}>
                 {turnip.morning_price}
               </Text>
             </Flex>
             :
             <Flex alignItems='center'>
-              <Text fontSize='5xl'>
+              <Text fontSize={{ lg: '4xl', sm: '3xl' }}>
                 {turnip.afternoon_price}
               </Text>
             </Flex>}
         </Flex>
       </Flex>
-      {Number(loginId) === Number(turnip.villager_id) ? (
-        <Flex>
-          <CloseButton size='sm' cursor='pointer' border='none' onClick={() => setIsOpen(true)} />
-        </Flex>
-      ) : null}
+      {
+        Number(loginId) === Number(turnip.villager_id) ? (
+          <Flex>
+            <CloseButton size='sm' cursor='pointer' border='none' onClick={() => setIsOpen(true)} />
+          </Flex>
+        ) : null
+      }
 
       {/* Alert for Deleting */}
       <AlertDialog
@@ -113,7 +115,7 @@ const TurnipCard = ({ turnip, deleteTurnip, morningTime, history }) => {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-    </PseudoBox>
+    </PseudoBox >
   )
 }
 
