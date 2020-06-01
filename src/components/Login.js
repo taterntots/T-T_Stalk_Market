@@ -75,7 +75,7 @@ const Login = ({ login, isLoading, history }) => {
           background='#FDFDFF'
           justify='center'
           borderRadius='12px'
-          w='450px'
+          w={{ lg: '450px', xs: '300px' }}
           p='5%'
         >
           <Flex
