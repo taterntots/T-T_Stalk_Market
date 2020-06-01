@@ -59,8 +59,8 @@ const Login = ({ login, isLoading, history }) => {
     <Flex
       h='100vh'
       align='center'
-      // justify='center'
-      pl='25%'
+      justify={{ lg: 'left', xs: 'center' }}
+      pl={{ lg: '25%', xs: '0%' }}
       style={{
         backgroundSize: 'cover',
         backgroundPosition: 'center',
