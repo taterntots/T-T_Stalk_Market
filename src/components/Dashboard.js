@@ -217,13 +217,17 @@ const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, histo
             <Button backgroundColor='#F3747B' border='none' color='white' onClick={logout}>Logout</Button>
           </Flex>
 
-          <Flex as='h2' color='white' justify='center' mb='10px' display={{ lg: 'none', xs: 'flex' }}>
+          <Flex as='h2' color='white' justify='center' mb='10px' display={{ lg: 'none', md: 'none', xs: 'flex' }}>
             {currentDate}
           </Flex>
 
           {/* Buttons for turnip time of day */}
-          <Flex justify='space-evenly' mx='10%'>
-            <Flex mb='10px'>
+          <Flex
+            justify='space-evenly'
+            direction={{ lg: 'row', md: 'row', sm: 'row', xs: 'column' }}
+            mx='10%'
+          >
+            <Flex mb='10px' justify='center'>
               <Button backgroundColor={morningTime ? '#F8996D' : '#91D5E2'} border='none' color='white' onClick={navToMorningPrice}>Morning</Button>
               {morningTime ?
                 <Button backgroundColor='#91D5E2' border='none' color='white' onClick={onOpen} ml='5px'>+</Button>
@@ -232,11 +236,11 @@ const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, histo
               }
             </Flex>
 
-            <Text as='h2' color='white' textAlign='center' display={{ lg: 'flex', xs: 'none' }}>
+            <Text as='h2' color='white' textAlign='center' display={{ lg: 'flex', md: 'flex', xs: 'none' }}>
               {currentDate}
             </Text>
 
-            <Flex>
+            <Flex mb='10px' justify='center'>
               <Button backgroundColor={!morningTime ? '#F8996D' : '#91D5E2'} border='none' color='white' onClick={navToAfternoonPrice}>Afternoon</Button>
               {morningTime ?
                 <Button backgroundColor='#91D5E2' border='none' color='white' onClick={onOpen} isDisabled={true} ml='5px'>+</Button>
@@ -247,7 +251,7 @@ const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, histo
           </Flex>
         </Box>
 
-        <Flex pt={{ lg: '105px', xs: '150px' }}>
+        <Flex pt={{ lg: '105px', md: '105px', sm: '150px', xs: '200px' }}>
           {/* Space for Fixed Navbar */}
         </Flex>
 

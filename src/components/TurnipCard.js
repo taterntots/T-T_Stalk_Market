@@ -47,36 +47,36 @@ const TurnipCard = ({ turnip, deleteTurnip, morningTime, history }) => {
       p='10px'
     >
       <Flex width='100%' justify='space-evenly'>
-        <Flex alignItems='center' display={{ lg: 'flex', xs: 'none' }}>
-          <Image src={require('../icons/paw-print.png')} size={{ lg: '4em', xs: '3em' }} />
+        <Flex alignItems='center' display={{ lg: 'flex', md: 'flex', xs: 'none' }}>
+          <Image src={require('../icons/paw-print.png')} size={{ lg: '4em', md: '4em', xs: '2em' }} />
         </Flex>
-        <Flex alignItems='center' display={{ lg: 'flex', xs: 'none' }}>
-          <Text fontSize={{ lg: '4xl', xs: '3xl' }}>
+        <Flex alignItems='center' display={{ lg: 'flex', md: 'flex', xs: 'none' }}>
+          <Text fontSize={{ lg: '4xl', md: '4xl', xs: '2xl' }}>
             {turnip.villager_name}
           </Text>
         </Flex>
         <Flex alignItems='center' >
-          <Image src={require('../icons/island.png')} size={{ lg: '4em', xs: '3em' }} />
+          <Image src={require('../icons/island.png')} size={{ lg: '4em', md: '4em', xs: '2em' }} />
         </Flex>
         <Flex alignItems='center'>
-          <Text fontSize={{ lg: '4xl', xs: '3xl' }}>
+          <Text fontSize={{ lg: '4xl', md: '4xl', xs: '2xl' }}>
             {turnip.island_name}
           </Text>
         </Flex>
         <Flex alignItems='center' >
-          <Image src={require('../icons/bell-bag.png')} size={{ lg: '4em', xs: '3em' }} />
+          <Image src={require('../icons/bell-bag.png')} size={{ lg: '4em', md: '4em', xs: '2em' }} />
         </Flex>
         <Flex justify='center'>
           {morningTime
             ?
             <Flex alignItems='center'>
-              <Text fontSize={{ lg: '4xl', xs: '3xl' }}>
+              <Text fontSize={{ lg: '4xl', md: '4xl', xs: '2xl' }}>
                 {turnip.morning_price}
               </Text>
             </Flex>
             :
             <Flex alignItems='center'>
-              <Text fontSize={{ lg: '4xl', xs: '3xl' }}>
+              <Text fontSize={{ lg: '4xl', md: '4xl', xs: '2xl' }}>
                 {turnip.afternoon_price}
               </Text>
             </Flex>}
