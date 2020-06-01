@@ -192,9 +192,7 @@ const Dashboard = ({ data, getTurnips, postTurnip, turnipAdded, isLoading, histo
 
       {/* Header with turnip title and date */}
       <Box
-        // h='100vh'
-        // bg='#E4D6A2'
-        // pt='2%'
+        h='100vh'
         style={{
           backgroundSize: 'cover',
           backgroundPosition: 'center',
