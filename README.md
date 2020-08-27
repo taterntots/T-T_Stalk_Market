@@ -18,7 +18,6 @@ Welcome to The Tater & Tots Community Stalk Market! This is a simple web applica
 - [React](https://reactjs.org/): Current industry standard for web applications, using React let us displaying large amounts of data effectively by implementing Components. It is also very scalable, perfect for large applications with huge growth potential.
 - [Redux](https://redux.js.org/): Centralizes our application's state and logic, easy to test/debug, works with any UI layer
 - [Chakra](https://chakra-ui.com/): Chakra UI is accessible and themeable component library. Simple to implement and build beautiful looking apps fast.
-- [Cypress](https://docs.cypress.io/): Fast, easy and reliable testing for anything that runs in a browser. Amazing UI tool for making setting up, writing, and running tests a breeze and easy to visualize. (Tests yet to be implimented).
 
 #### Front end deployed to [Netlify](https://taterntots-stalk-market.netlify.app/).
 
@@ -28,7 +27,6 @@ Welcome to The Tater & Tots Community Stalk Market! This is a simple web applica
 - Express
 - Knex
 - PostgreSQL
-- Cypress (Tests yet to be implimented)
 
 # APIs
 
@@ -52,7 +50,7 @@ Returns:
 {
 	"villager_name": "yourvillagername",
 	"island_name": "yourislandname",
-  "token": "yourtoken"
+  	"token": "yourtoken",
 	"id": 1
 }
 ```
