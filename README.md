@@ -1,4 +1,4 @@
-# T-T_Stalk_Market
+# Tater & Tots Stalk Market
 
 You can find the deployed project on [Netlify](https://taterntots-stalk-market.netlify.app/).
 
