@@ -62,7 +62,7 @@ create a .env.local file that includes the following:
 
 \_ REACT_APP - Notates the enviroment for the database.
 
-    REACT_APP_databaseURL=http://localhost:3333/api/
+    REACT_APP_DATABASE_URL=http://localhost:3333/api/
 	REACT_APP_NODE_ENV=development
        
 # Installation Instructions
